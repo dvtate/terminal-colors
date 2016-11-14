@@ -2,6 +2,8 @@
 a colorful terminal text library
 
 NOTE: this shouldn't be compatible with windows versions prior to windows 10, so I reccomend not using windows at all.
+## example.cpp running in xterm
+![example gif](https://raw.githubusercontent.com/dvtate/terminal-colors/master/example-2016-11-14_01.20.09.gif)
 
 # What's included?
 
