@@ -14,14 +14,22 @@ int main(){
 	color.g = 0;
 	color_printf(color, "hello world!\n");
 
-	setBgColor("#0ff");
-	setFgColor("#800");
+	setBgColor("cyan");
+	setFgColor("rgb 255, 0, 0");
 	printf("\nHello, I should be cyan...");
 	setBgColor("#0f0");
 	printf("derp...derp...derp\n");
 
+	// set the background color back to default
+	setBgColor();
+	printf("derp...derp...derp\n");
+
+	// reset colors, effects, etc.
 	resetASCII();
-	setEffect(TERM_CLR_BLINK);
+
+	// I like blinking text
+	// so far the onlt think I've seen this work in is xterm
+	setEffect(TERM_EFF_BLINK);
 	printf("resetASCII() resets all terminal colors and effects.\n");
 
 
