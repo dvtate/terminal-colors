@@ -9,11 +9,6 @@
 #include "terminal_colors.hpp"
 
 
-void resetASCII(){
-	printf("\x1B[0m");
-}
-
-
 // prints an rgb format string
 void color_printf(const uint8_t red, const uint8_t green, const uint8_t blue, const char* format, ...){
 	printf("\x1B[38;2;%d;%d;%dm", red, green, blue); // set color
@@ -62,20 +57,21 @@ void color_printf(const RGB_t color, const char* format, ...){
 
 
 }
-
-static unsigned short int countSpaces(char* str){
+/* this would get used if I added un guarded numbers 
+*	ie - #333 = 333; #444444 = 444444; rgb(12,3,5) = 12 3 5
+static inline unsigned short int countSpaces(char* str){
 	if (str == NULL)
 		return 0;
 
 	unsigned short int ret = 0;
 	while (*(str++))
-		if (isspace(*(str++)))
+		if (isspace(*(str)))
 			ret++;
 
 	return ret;
 
 }
-
+*/
 
 // used when differentiating between the color black
 // and the color returned on error

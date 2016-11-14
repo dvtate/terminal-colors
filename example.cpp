@@ -29,7 +29,7 @@ int main(){
 
 	// I like blinking text
 	// so far the onlt think I've seen this work in is xterm
-	setEffect(TERM_EFF_BLINK);
+	setTermEffect(TERM_EFF_BLINK);
 	printf("resetASCII() resets all terminal colors and effects.\n");
 
 
