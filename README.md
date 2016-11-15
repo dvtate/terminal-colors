@@ -1,5 +1,5 @@
 # terminal-colors
-a colorful terminal text library
+A colorful terminal text effects library. It makes using terminal effects ie- color changes, blinking text, rich text, etc. easier. This is actually just a small part of my scripting language, but I felt it could be useful on it's own.
 
 NOTE: this shouldn't be compatible with windows versions prior to windows 10, so I reccomend not using windows at all.
 ## example.cpp running in xterm <!-- update this plz-->
