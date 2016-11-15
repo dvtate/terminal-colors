@@ -3,7 +3,7 @@ a colorful terminal text library
 
 NOTE: this shouldn't be compatible with windows versions prior to windows 10, so I reccomend not using windows at all.
 ## example.cpp running in xterm <!-- update this plz-->
-![example gif](https://raw.githubusercontent.com/dvtate/terminal-colors/master/example-2016-11-14_01.20.09.gif) 
+![example gif](demo.gif) 
 
 # What's included?
 
@@ -24,7 +24,7 @@ NOTE: this shouldn't be compatible with windows versions prior to windows 10, so
 ## resetANSI()
   - `resetANSI(void)`: resets the terminal back to its original/default state
 
-## fsetFgColor, fsetBgColor, fsetTextEffect, fresetANSI(), etc.
+## fsetFgColor, fsetBgColor, fsetTextEffect, fresetANSI(), color_fprintf, etc.
   - these serve the same function as the regular functions, but allow the output to be piped to a file other than stdout.
   - the first argument is the file to replace stdout
 
