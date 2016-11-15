@@ -25,13 +25,13 @@ int main(){
 	printf("derp...derp...derp\n");
 
 	// reset colors, effects, etc.
-	resetASCII();
+	resetANSI();
 
 	// I like blinking text
 	// so far the onlt think I've seen this work in is xterm
 	setTermEffect(TERM_EFF_BLINK);
-	printf("resetASCII() resets all terminal colors and effects.\n");
+	printf("resetANSI() resets all terminal colors and effects.\n");
 
 
-	resetASCII(); // this should be at the end of all programs...
+	resetANSI(); // this should be at the end of all programs...
 }
