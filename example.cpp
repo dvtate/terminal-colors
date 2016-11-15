@@ -3,11 +3,11 @@
 
 int main(){
 
-	color_printf("rgb(255,0,255)", "hello world! %d\n", 666);
-	color_printf("#FF00ff", "hello world!\n%s\n", "printf in color! ");
-	color_printf("#f0f", "hello world!\n");
-	color_printf("magenta", "hello world!\n");
-	color_printf(255, 0, 255, "hello world!\n");
+	color_fprintf(stdout, "rgb(255,0,255)", "Hello world! %d\n", 666);
+	color_fprintf(stderr, "#FF00ff", "Hello world!\n%s\n", "\tprintf in color! XDDDD");
+	color_printf("#f0f", "Hello world!\n");
+	color_printf("magenta", "Hello world%c \n", '!');
+	color_printf(255, 0, 255, "Hello world!\n");
 
 	RGB_t color;
 	color.r = color.b = 255;
