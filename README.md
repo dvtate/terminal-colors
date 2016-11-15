@@ -2,8 +2,8 @@
 a colorful terminal text library
 
 NOTE: this shouldn't be compatible with windows versions prior to windows 10, so I reccomend not using windows at all.
-## example.cpp running in xterm
-![example gif](https://raw.githubusercontent.com/dvtate/terminal-colors/master/example-2016-11-14_01.20.09.gif)
+## example.cpp running in xterm <!-- update this plz-->
+![example gif](https://raw.githubusercontent.com/dvtate/terminal-colors/master/example-2016-11-14_01.20.09.gif) 
 
 # What's included?
 
@@ -18,9 +18,13 @@ NOTE: this shouldn't be compatible with windows versions prior to windows 10, so
   - `void setFgColor(const char* color)`: sets the foreground color to a valid HTML color
   - `void setFgColor(void)`: sets the foreground color back to its original state
 
-## setTermEffect()
+## setTermEffect
   - `setTermEffect(const uint8_t effect)`: sets the text effect to whichever text effect you would prefer, there are macros defined for eache effect, but I reccomend reading this ( https://en.wikipedia.org/wiki/ANSI_escape_code#CSI_codes ) wiki article. 
   
-## resetASCII()
-  - `resetASCII(void)`: resets the terminal back to its original/default state
- 
+## resetANSI()
+  - `resetANSI(void)`: resets the terminal back to its original/default state
+
+## fsetFgColor, fsetBgColor, fsetTextEffect, fresetANSI(), etc.
+  - these serve the same function as the regular functions, but allow the output to be piped to a file other than stdout.
+  - the first argument is the file to replace stdout
+
