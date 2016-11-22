@@ -24,6 +24,9 @@ int main(){
 	setBgColor();
 	printf("derp...derp...derp\n");
 
+	setFgColor();
+	printf("durrrrrrr\n");
+
 	// reset colors, effects, etc.
 	resetANSI();
 
