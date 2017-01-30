@@ -6,3 +6,6 @@ compiler:
   - clang
   
 script: g++ *.cpp -Wall -Wextra -o terminal_colors_example
+
+notifications:
+  email: false
