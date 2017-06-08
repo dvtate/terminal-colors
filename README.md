@@ -1,7 +1,8 @@
 # terminal-colors [![Build Status](https://travis-ci.org/dvtate/terminal-colors.svg?branch=master)](https://travis-ci.org/dvtate/terminal-colors)
 A colorful terminal text effects library. It makes using terminal effects ie- color changes, blinking text, rich text, etc. easier. This is actually just a small part of my scripting language, but I felt it could be useful on it's own.
 
-NOTE: this shouldn't be compatible with windows versions prior to windows 10, so I reccomend not using windows at all.
+
+NOTE: this shouldn't be compatible with windows, so I reccomend not using windows at all.
 ## example.cpp running in xterm <!-- update this plz-->
 ![example gif](demo.gif) 
 
@@ -28,3 +29,7 @@ NOTE: this shouldn't be compatible with windows versions prior to windows 10, so
   - these serve the same function as the regular functions, but allow the output to be piped to a file other than stdout.
   - the first argument is the file to replace stdout
 
+# Potential Issues:
+  - **Endianess:** The `struct RGB_t` involves a specific byte ordering, it has only been tested on little-endian machines, but big-endian should work. If you have a big-endian machine please share your results. This library should produce undefined output on a middle-endian machine.
+  - **OS/Terminal Compatibility:** this library was built for xterm in Arch Linux (2016). The colors should work in any terminal emulator which supports 24-bit colors. The effects are not uniform and you may want to refer to this article: https://en.wikipedia.org/wiki/ANSI_escape_code
+  
