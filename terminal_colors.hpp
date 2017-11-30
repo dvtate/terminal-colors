@@ -102,9 +102,9 @@ typedef struct RGB_t {
 				// may produce undefined behavior on such archatectures
 
 				#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
-					unsigned int b : 8, g : 8, r : 8;
+					uint8_t b, g, r;
 				#else // __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__
-					unsigned int r : 8, g : 8, b : 8;
+					uint8_t r, g, b;
 				#endif // __ORDER_PDP_ENDIAN__ not supported
 
 			};
@@ -177,26 +177,6 @@ inline void setBgColor(const char* ccolor)
 	{ return fsetBgColor(stdout, ccolor); }
 inline void setBgColor()
 	{  setTermEffect(TERM_EFF_DEFAULT_BG); }
-
-// this might get used in the distant future
-static inline void cycle3(uint8_t& v0, uint8_t& v1, uint8_t& v2, uint8_t& curHi)
-{
-	// modify color
-	if (curHi == 0)
-		{ v0--; v1++; }
-	else if (curHi == 1)
-		{ v1--; v2++; }
-	else if (curHi == 2)
-		{ v2--; v0++; }
-
-	// change colors as needed
-	if (v0 <= 0 && curHi == 0)
-		curHi = 1;
-	else if (v1 <= 0 && curHi == 1)
-		curHi = 2;
-	else if (v2 <= 0 && curHi == 2)
-		curHi = 0;
-}
 
 
 #endif
