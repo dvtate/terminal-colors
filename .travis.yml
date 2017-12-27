@@ -5,7 +5,9 @@ compiler:
   - gcc
   - clang
   
-script: g++ *.cpp -Wall -Wextra -o terminal_colors_example
+script: 
+  - g++ example.cpp terminal_colors.cpp -Wall -Wextra -o terminal_colors_example
+  - g++ rainbow.cpp terminal_colors.cpp -Wall -Wextra -o terminal_colors_example2
 
 notifications:
   email: false
