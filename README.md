@@ -1,12 +1,16 @@
 # terminal-colors [![Build Status](https://travis-ci.org/dvtate/terminal-colors.svg?branch=master)](https://travis-ci.org/dvtate/terminal-colors)
 A colorful terminal text effects library. It makes using terminal effects ie- color changes, blinking text, rich text, etc. easier. This is actually just a small part of my scripting language, but I felt it could be useful on it's own.
 
-
 NOTE: this shouldn't be compatible with windows, so I reccomend not using windows at all.
 ## example.cpp running in xterm <!-- update this plz-->
 ![example gif](demo.gif) 
 
 # What's included?
+## Intuitive Color Names
+  - valid html colors can be used to specify colors instead of individual rgb components
+  - examples: `rgb(120, 0, 255)`, `goldenrod`, `#3fe2a9`, `#333`
+  - the parser is actually even less strict than html
+  - examples: `333`, `120,0,255`
 
 ## color_printf()
   - `void color_printf(uint8_t r, uint8_t g, uint8_t b, const char* format, ...)`: use the r, g, and b values to give a 24bit color. 
