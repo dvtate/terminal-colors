@@ -1,7 +1,6 @@
 # terminal-colors [![Build Status](https://travis-ci.org/dvtate/terminal-colors.svg?branch=master)](https://travis-ci.org/dvtate/terminal-colors)
-A colorful terminal text effects library. It makes using terminal effects ie- color changes, blinking text, rich text, etc. easier. This is actually just a small part of my scripting language, but I felt it could be useful on it's own.
+A colorful terminal text effects library. It makes using terminal effects ie- color changes, blinking text, rich text, etc. easy by using tools the programmer is familiar with like HTML colors and stdio function wrappers instead of making you memorize escape sequences and manually convert colors.
 
-NOTE: this shouldn't be compatible with windows, so I reccomend not using windows at all.
 ## example.cpp running in xterm <!-- update this plz-->
 ![example gif](demo.gif) 
 
