@@ -3,16 +3,14 @@
 
 
 int main(){
-
+	// Example printf calls
 	color_fprintf(stdout, "rgb(255,0,255)", "Hello world! %d\n", 666);
 	color_fprintf(stderr, "#FF00ff", "Hello world!\n%s\n", "\tprintf in color! XDDDD");
 	color_printf("#f0f", "Hello world!\n");
 	color_printf("magenta", "Hello world%c \n", '!');
 	color_printf(255, 0, 255, "Hello world!\n");
 
-	// 24-bit value, varies by platfom 
-	// (RGB becomes GBR on little endian)
-	// generally there is no need to worry about this however
+	// Using RGB_t
 	RGB_t color;
 	color.r = color.b = 255;
 	color.g = 0;
@@ -39,6 +37,6 @@ int main(){
 	setTermEffect(TERM_EFF_BLINK);
 	printf("resetANSI() resets all terminal colors and effects.\n");
 
-	
-	resetANSI(); // this should be at the end of all programs...
+	// this should be at the end of all programs...
+	resetANSI();
 }

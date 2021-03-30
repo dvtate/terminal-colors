@@ -27,7 +27,6 @@ inline void cycle3(uint8_t& v0, uint8_t& v1, uint8_t& v2, uint8_t& curHi)
 // prints a rainbow message
 void rainbowPrint(const char* msg, const unsigned pace = 10)
 {
-
 	// our color
 	RGB_t clr;
 	clr.r = 255;
@@ -36,30 +35,22 @@ void rainbowPrint(const char* msg, const unsigned pace = 10)
 	// color which starts high
 	uint8_t curHi = 0;
 
-	// which character are we on now?
-	size_t chnum = 0;
-
-	for (size_t cycle = 0; cycle < strlen(msg); cycle++) {
-		
-		// shift color	
+	// For each character
+	for (size_t i = 0; i < strlen(msg); i++) {
+		// shift color
 		for (unsigned p = pace; p > 0; p--)
 			cycle3(clr.r, clr.g, clr.b, curHi);
 
 		// print color
-		color_printf(clr, "%c", msg[chnum++]);
+		color_printf(clr, "%c", msg[i++]);
 	}
 
-
-
-
-	setFgColor(); // reset fg color
-
-
+	// reset fg color
+	setFgColor();
 }
 
 int main()
 {
-
 	rainbowPrint("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do\
  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\
  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis\

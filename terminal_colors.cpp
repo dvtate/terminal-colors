@@ -4,6 +4,9 @@
 #include <string.h>
 #include <ctype.h>
 
+#include <string>
+#include <unordered_map>
+
 #include "terminal_colors.hpp"
 
 
@@ -26,7 +29,6 @@ static inline unsigned short int countSpaces(char* str){
 	return ret;
 
 }
-
 
 // used when differentiating between the color black
 // and the color returned on error
@@ -120,12 +122,9 @@ RGB_t hex3ToClr(const char* hex){
 }
 
 
-
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+// ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 // setFgColor()
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+// ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 inline void fsetFgColor(FILE* file, const uint8_t red, const uint8_t green,
 						const uint8_t blue)
@@ -234,13 +233,9 @@ _end:
 }
 
 
-
-
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+// ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 // setBgColor()
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+// ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 inline void setBgColor(const uint8_t red, const uint8_t green, const uint8_t blue)
 	{ printf("\x1B[48;2;%d;%d;%dm", red, green, blue); }
@@ -657,10 +652,172 @@ end_printf:
 }
 
 
+// A list of html colors
+static std::unordered_map<std::string, RGB_t> colors_map = {
+	// Common
+	{ "black",		(RGB_t) { { 0 } }},
+	{ "white",		(RGB_t) { { 16777215 } } },
+	{ "red",		(RGB_t) { { 16711680 } } },
+	{ "blue",		(RGB_t) { { 255 } } },
+	{ "green",		(RGB_t) { { 32768 } } },
+	{ "cyan",		(RGB_t) { { 65535 } } },
+	{ "aqua",		(RGB_t) { { 65535 } } },
+	{ "magenta",	(RGB_t) { { 16711935 } } },
+	{ "fuchsia",	(RGB_t) { { 16711935 } } },
+	{ "gray",		(RGB_t) { { 8421504 } } },
+	{ "yellow",		(RGB_t) { { 16776960 } } },
+	{ "pink",		(RGB_t) { { 16761035 } } },
+	{ "orange",		(RGB_t) { { 16753920 } } },
+	{ "gold",		(RGB_t) { { 16766720 } } },
+	{ "purple",		(RGB_t) { { 8388736 } } },
+	{ "brown",		(RGB_t) { { 10824234 } } },
+	{ "navy",		(RGB_t) { { 128 } } },
+	{ "indigo",		(RGB_t) { { 4915330 } } },
 
+	// Reds
+	{ "indianred",		(RGB_t) { { 13458524 } } },
+	{ "lightcoral",		(RGB_t) { { 15761536 } } },
+	{ "salmon",			(RGB_t) { { 16416882 } } },
+	{ "darksalmon",		(RGB_t) { { 15308410 } } },
+	{ "lightsalmon",	(RGB_t) { { 16752762 } } },
+	{ "crimson",		(RGB_t) { { 14423100 } } },
+	{ "darkred",		(RGB_t) { { 9109504 } } },
+	{ "firebrick",		(RGB_t) { { 11674146 } } },
 
+	// pinks
+	{ "lightpink",		(RGB_t) { { 16758465 } } },
+	{ "hotpink",		(RGB_t) { { 16738740 } } },
+	{ "deeppink",		(RGB_t) { { 16716947 } } },
+	{ "mediumvioletred",(RGB_t) { { 13047173 } } },
+	{ "palevioletred",	(RGB_t) { { 14381203 } } },
 
+	// oranges
+	{ "lightsalmon",(RGB_t) { { 16752762 } } },
+	{ "coral",		(RGB_t) { { 16744272 } } },
+	{ "tomato",		(RGB_t) { { 16737095 } } },
+	{ "orangered",	(RGB_t) { { 16729344 } } },
+	{ "darkorange",	(RGB_t) { { 16747520 } } },
 
+	// yellows
+	{ "lightyellow",			(RGB_t) { { 16777184 } } },
+	{ "lightgoldenrodyellow",	(RGB_t) { { 16775885 } } },
+	{ "papayawhip",				(RGB_t) { { 16773077 } } },
+	{ "moccasin",				(RGB_t) { { 16770229 } } },
+	{ "peachpuff",				(RGB_t) { { 16767673 } } },
+	{ "palegoldenrod",			(RGB_t) { { 15657130 } } },
+	{ "khaki",					(RGB_t) { { 15787660 } } },
+	{ "darkkhaki",				(RGB_t) { { 12433259 } } },
+
+	// purples
+	{ "lavender",		(RGB_t) { { 15132410 } } },
+	{ "thistle",		(RGB_t) { { 14204888 } } },
+	{ "plum",			(RGB_t) { { 14524637 } } },
+	{ "violet",			(RGB_t) { { 15631086 } } },
+	{ "orchid",			(RGB_t) { { 14315734 } } },
+	{ "mediumorchid",	(RGB_t) { { 12211667 } } },
+	{ "mediumpurple",	(RGB_t) { { 9662683 } } },
+	{ "rebeccapurple",	(RGB_t) { { 6697881 } } },
+	{ "blueviolet",		(RGB_t) { { 9055202 } } },
+	{ "darkviolet",		(RGB_t) { { 9699539 } } },
+	{ "darkorchid",		(RGB_t) { { 10040012 } } },
+	{ "darkmagenta",	(RGB_t) { { 9109643 } } },
+	{ "slateblue",		(RGB_t) { { 6970061 } } },
+	{ "darkslateblue",	(RGB_t) { { 4734347 } } },
+	{ "mediumslateblue",(RGB_t) { { 8087790 } } },
+
+	// greens
+	{ "greenyellow",		(RGB_t) { { 11403055 } } },
+	{ "chartreuse",			(RGB_t) { { 8388352 } } },
+	{ "lawngreen",			(RGB_t) { { 8190976 } } },
+	{ "lime",				(RGB_t) { { 65280 } } },
+	{ "limegreen",			(RGB_t) { { 3329330 } } },
+	{ "palegreen",			(RGB_t) { { 10025880 } } },
+	{ "lightgreen",			(RGB_t) { { 9498256 } } },
+	{ "mediumspringgreen",	(RGB_t) { { 64154 } } },
+	{ "springgreen",		(RGB_t) { { 64154 } } },
+	{ "mediumseagreen",		(RGB_t) { { 65407 } } },
+	{ "forestgreen",		(RGB_t) { { 2263842 } } },
+	{ "darkgreen",			(RGB_t) { { 25600 } } },
+	{ "yellowgreen",		(RGB_t) { { 10145074 } } },
+	{ "olivedarb",			(RGB_t) { { 7048739 } } },
+	{ "olive",				(RGB_t) { { 8421376 } } },
+	{ "darkolivegreen",		(RGB_t) { { 5597999 } } },
+	{ "mediumaquamarine",	(RGB_t) { { 6737322 } } },
+	{ "darkseagreen",		(RGB_t) { { 9419915 } } },
+	{ "lightseagreen",		(RGB_t) { { 2142890 } } },
+	{ "darkcyan",			(RGB_t) { { 35723 } } },
+	{ "teal",				(RGB_t) { { 32896 } } },
+
+	// blues
+	{ "lightcyan",		(RGB_t) { { 14745599 } } },
+	{ "paleturquoise",	(RGB_t) { { 11529966 } } },
+	{ "aquamarine",		(RGB_t) { { 8388564 } } },
+	{ "turquoise",		(RGB_t) { { 4251856 } } },
+	{ "mediumturquoise",(RGB_t) { { 4772300 } } },
+	{ "darkturquoise",	(RGB_t) { { 52945 } } },
+	{ "cadetblue",		(RGB_t) { { 6266528 } } },
+	{ "steelblue",		(RGB_t) { { 4620980 } } },
+	{ "lightsteelblue",	(RGB_t) { { 11584734 } } },
+	{ "powderblue",		(RGB_t) { { 11591910 } } },
+	{ "lightblue",		(RGB_t) { { 11393254 } } },
+	{ "skyblue",		(RGB_t) { { 8900331 } } },
+	{ "lightskyblue",	(RGB_t) { { 8900346 } } },
+	{ "deepskyblue",	(RGB_t) { { 49151 } } },
+	{ "dodgerblue",		(RGB_t) { { 2003199 } } },
+	{ "cornflowerblue",	(RGB_t) { { 6591981 } } },
+	{ "mediumslateblue",(RGB_t) { { 8087790 } } },
+	{ "royalblue",		(RGB_t) { { 4286945 } } },
+	{ "mediumblue",		(RGB_t) { { 205 } } },
+	{ "darkblue",		(RGB_t) { { 139 } } },
+	{ "midnightblue",	(RGB_t) { { 1644912 } } },
+
+	// browns
+	{ "cornsilk",		(RGB_t) { { 16775388 } } },
+	{ "blanchedalmond",	(RGB_t) { { 16772045 } } },
+	{ "bisque",			(RGB_t) { { 16770244 } } },
+	{ "navajowhite",	(RGB_t) { { 16768685 } } },
+	{ "wheat",			(RGB_t) { { 16113325 } } },
+	{ "burlywood",		(RGB_t) { { 14596231 } } },
+	{ "tan",			(RGB_t) { { 13808780 } } },
+	{ "rosybrown",		(RGB_t) { { 12357519 } } },
+	{ "sandybrown",		(RGB_t) { { 16032864 } } },
+	{ "goldenrod",		(RGB_t) { { 14329120 } } },
+	{ "peru",			(RGB_t) { { 13468991 } } },
+	{ "chocolate",		(RGB_t) { { 13789470 } } },
+	{ "saddlebrown",	(RGB_t) { { 9127187 } } },
+	{ "sienna",			(RGB_t) { { 10506797 } } },
+	{ "maroon",			(RGB_t) { { 8388608 } } },
+
+	// whites
+	{ "snow",			(RGB_t) { { 16775930 } } },
+	{ "honeydew",		(RGB_t) { { 15794160 } } },
+	{ "mintcream",		(RGB_t) { { 16121850 } } },
+	{ "azure",			(RGB_t) { { 15794175 } } },
+	{ "aliceblue",		(RGB_t) { { 15792383 } } },
+	{ "ghostwhite",		(RGB_t) { { 16316671 } } },
+	{ "whitesmoke",		(RGB_t) { { 16119285 } } },
+	{ "seashell",		(RGB_t) { { 16774638 } } },
+	{ "beige",			(RGB_t) { { 16119260 } } },
+	{ "oldlace",		(RGB_t) { { 16643558 } } },
+	{ "floralwhite",	(RGB_t) { { 16775920 } } },
+	{ "ivory",			(RGB_t) { { 16777200 } } },
+	{ "antiquewhite",	(RGB_t) { { 16444375 } } },
+	{ "linen",			(RGB_t) { { 16445670 } } },
+	{ "lavenderblush",	(RGB_t) { { 16773365 } } },
+	{ "mistyrose",		(RGB_t) { { 16770273 } } },
+
+	// greys
+	{ "gainsboro",		(RGB_t) { { 14474460 } } },
+	{ "lightgrey",		(RGB_t) { { 13882323 } } },
+	{ "silver",			(RGB_t) { { 12632256 } } },
+	{ "darkgrey",		(RGB_t) { { 11119017 } } },
+	{ "dimgrey",		(RGB_t) { { 6908265 } } },
+	{ "lightslategrey",	(RGB_t) { { 7833753 } } },
+	{ "slategrey",		(RGB_t) { { 7372944 } } },
+	{ "darkslategrey",	(RGB_t) { { 3100495 } } },
+};
+
+// Find color corresponding to given name
 const RGB_t nameToColor(const char* const cname){
 	if (!cname)
 		return (RGB_t) { { 0 } };
@@ -672,306 +829,5 @@ const RGB_t nameToColor(const char* const cname){
 	for (size_t i = 0; i <= strlen(name); i++)
 		*(name + i) = tolower(*(name + i));
 
-
-	// most used colors come first
-	if (strcmp(name, "black") == 0)
-		return (RGB_t) { { 0 } }; // double braces to eliminate clang warnings
-	else if (strcmp(name, "white") == 0)
-		return (RGB_t) { { 16777215 } };
-	else if (strcmp(name, "red") == 0)
-		return (RGB_t) { { 16711680 } };
-	else if (strcmp(name, "blue") == 0)
-		return (RGB_t) { { 255 } };
-	else if (strcmp(name, "green") == 0)
-		return (RGB_t) { { 32768 } };
-	else if (strcmp(name, "cyan") == 0 || strcmp(name, "aqua") == 0)
-		return (RGB_t) { { 65535 } };
-	else if (strcmp(name, "magenta") == 0 || strcmp(name, "fuchsia") == 0)
-		return (RGB_t) { { 16711935 } };
-	else if (strcmp(name, "gray") == 0)
-		return (RGB_t) { { 8421504 } };
-	else if (strcmp(name, "yellow") == 0)
-		return (RGB_t) { { 16776960 } };
-	else if (strcmp(name, "pink") == 0)
-		return (RGB_t) { { 16761035 } };
-	else if (strcmp(name, "orange") == 0)
-		return (RGB_t) { { 16753920 } };
-	else if (strcmp(name, "gold") == 0)
-		return (RGB_t) { { 16766720 } };
-	else if (strcmp(name, "purple") == 0)
-		return (RGB_t) { { 8388736 } };
-	else if (strcmp(name, "brown") == 0)
-		return (RGB_t) { { 10824234 } };
-	else if (strcmp(name, "navy") == 0)
-		return (RGB_t) { { 128 } };
-	else if (strcmp(name, "indigo") == 0)
-		return (RGB_t) { { 4915330 } };
-
-
-	// reds
-	if (strcmp(name, "indianred") == 0)
-		return (RGB_t) { { 13458524 } };
-	else if (strcmp(name, "lightcoral") == 0)
-		return (RGB_t) { { 15761536 } };
-	else if (strcmp(name, "salmon") == 0)
-		return (RGB_t) { { 16416882 } };
-	else if (strcmp(name, "darksalmon") == 0)
-		return (RGB_t) { { 15308410 } };
-	else if (strcmp(name, "lightsalmon") == 0)
-		return (RGB_t) { { 16752762 } };
-	else if (strcmp(name, "crimson") == 0)
-		return (RGB_t) { { 14423100 } };
-	else if (strcmp(name, "darkred") == 0)
-		return (RGB_t) { { 9109504 } };
-	else if (strcmp(name, "firebrick") == 0)
-		return (RGB_t) { { 11674146 } };
-
-	// pinks
-	else if (strcmp(name, "lightpink") == 0)
-		return (RGB_t) { { 16758465 } };
-	else if (strcmp(name, "hotpink") == 0)
-		return (RGB_t) { { 16738740 } };
-	else if (strcmp(name, "deeppink") == 0)
-		return (RGB_t) { { 16716947 } };
-	else if (strcmp(name, "mediumvioletred") == 0)
-		return (RGB_t) { { 13047173 } };
-	else if (strcmp(name, "palevioletred") == 0)
-		return (RGB_t) { { 14381203 } };
-
-	// oranges
-	else if (strcmp(name, "lightsalmon") == 0)
-		return (RGB_t) { { 16752762 } };
-	else if (strcmp(name, "coral") == 0)
-		return (RGB_t) { { 16744272 } };
-	else if (strcmp(name, "tomato") == 0)
-		return (RGB_t) { { 16737095 } };
-	else if (strcmp(name, "orangered") == 0)
-		return (RGB_t) { { 16729344 } };
-	else if (strcmp(name, "darkorange") == 0)
-		return (RGB_t) { { 16747520 } };
-
-	// yellows
-	else if (strcmp(name, "lightyellow") == 0)
-		return (RGB_t) { { 16777184 } };
-	else if (strcmp(name, "lightgoldenrodyellow") == 0)
-		return (RGB_t) { { 16775885 } };
-	else if (strcmp(name, "papayawhip") == 0)
-		return (RGB_t) { { 16773077 } };
-	else if (strcmp(name, "moccasin") == 0)
-		return (RGB_t) { { 16770229 } };
-	else if (strcmp(name, "peachpuff") == 0)
-		return (RGB_t) { { 16767673 } };
-	else if (strcmp(name, "palegoldenrod") == 0)
-		return (RGB_t) { { 15657130 } };
-	else if (strcmp(name, "khaki") == 0)
-		return (RGB_t) { { 15787660 } };
-	else if (strcmp(name, "darkkhaki") == 0)
-		return (RGB_t) { { 12433259 } };
-
-	// purples
-	else if (strcmp(name, "lavender") == 0)
-		return (RGB_t) { { 15132410 } };
-	else if (strcmp(name, "thistle") == 0)
-		return (RGB_t) { { 14204888 } };
-	else if (strcmp(name, "plum") == 0)
-		return (RGB_t) { { 14524637 } };
-	else if (strcmp(name, "violet") == 0)
-		return (RGB_t) { { 15631086 } };
-	else if (strcmp(name, "orchid") == 0)
-		return (RGB_t) { { 14315734 } };
-	else if (strcmp(name, "mediumorchid") == 0)
-		return (RGB_t) { { 12211667 } };
-	else if (strcmp(name, "mediumpurple") == 0)
-		return (RGB_t) { { 9662683 } };
-	else if (strcmp(name, "rebeccapurple") == 0)
-		return (RGB_t) { { 6697881 } };
-	else if (strcmp(name, "blueviolet") == 0)
-		return (RGB_t) { { 9055202 } };
-	else if (strcmp(name, "darkviolet") == 0)
-		return (RGB_t) { { 9699539 } };
-	else if (strcmp(name, "darkorchid") == 0)
-		return (RGB_t) { { 10040012 } };
-	else if (strcmp(name, "darkmagenta") == 0)
-		return (RGB_t) { { 9109643 } };
-	else if (strcmp(name, "slateblue") == 0)
-		return (RGB_t) { { 6970061 } };
-	else if (strcmp(name, "darkslateblue") == 0)
-		return (RGB_t) { { 4734347 } };
-	else if (strcmp(name, "mediumslateblue") == 0)
-		return (RGB_t) { { 8087790 } };
-
-	// greens
-	else if (strcmp(name, "greenyellow") == 0)
-		return (RGB_t) { { 11403055 } };
-	else if (strcmp(name, "chartreuse") == 0)
-		return (RGB_t) { { 8388352 } };
-	else if (strcmp(name, "lawngreen") == 0)
-		return (RGB_t) { { 8190976 } };
-	else if (strcmp(name, "lime") == 0)
-		return (RGB_t) { { 65280 } };
-	else if (strcmp(name, "limegreen") == 0)
-		return (RGB_t) { { 3329330 } };
-	else if (strcmp(name, "palegreen") == 0)
-		return (RGB_t) { { 10025880 } };
-	else if (strcmp(name, "lightgreen") == 0)
-		return (RGB_t) { { 9498256 } };
-	else if (strcmp(name, "mediumspringgreen") == 0)
-		return (RGB_t) { { 64154 } };
-	else if (strcmp(name, "springgreen") == 0)
-		return (RGB_t) { { 64154 } };
-	else if (strcmp(name, "mediumseagreen") == 0)
-		return (RGB_t) { { 65407 } };
-	else if (strcmp(name, "forestgreen") == 0)
-		return (RGB_t) { { 2263842 } };
-	else if (strcmp(name, "darkgreen") == 0)
-		return (RGB_t) { { 25600 } };
-	else if (strcmp(name, "yellowgreen") == 0)
-		return (RGB_t) { { 10145074 } };
-	else if (strcmp(name, "olivedarb") == 0)
-		return (RGB_t) { { 7048739 } };
-	else if (strcmp(name, "olive") == 0)
-		return (RGB_t) { { 8421376 } };
-	else if (strcmp(name, "darkolivegreen") == 0)
-		return (RGB_t) { { 5597999 } };
-	else if (strcmp(name, "mediumaquamarine") == 0)
-		return (RGB_t) { { 6737322 } };
-	else if (strcmp(name, "darkseagreen") == 0)
-		return (RGB_t) { { 9419915 } };
-	else if (strcmp(name, "lightseagreen") == 0)
-		return (RGB_t) { { 2142890 } };
-	else if (strcmp(name, "darkcyan") == 0)
-		return (RGB_t) { { 35723 } };
-	else if (strcmp(name, "teal") == 0)
-		return (RGB_t) { { 32896 } };
-
-	// blues
-	else if (strcmp(name, "lightcyan") == 0)
-		return (RGB_t) { { 14745599 } };
-	else if (strcmp(name, "paleturquoise") == 0)
-		return (RGB_t) { { 11529966 } };
-	else if (strcmp(name, "aquamarine") == 0)
-		return (RGB_t) { { 8388564 } };
-	else if (strcmp(name, "turquoise") == 0)
-		return (RGB_t) { { 4251856 } };
-	else if (strcmp(name, "mediumturquoise") == 0)
-		return (RGB_t) { { 4772300 } };
-	else if (strcmp(name, "darkturquoise") == 0)
-		return (RGB_t) { { 52945 } };
-	else if (strcmp(name, "cadetblue") == 0)
-		return (RGB_t) { { 6266528 } };
-	else if (strcmp(name, "steelblue") == 0)
-		return (RGB_t) { { 4620980 } };
-	else if (strcmp(name, "lightsteelblue") == 0)
-		return (RGB_t) { { 11584734 } };
-	else if (strcmp(name, "powderblue") == 0)
-		return (RGB_t) { { 11591910 } };
-	else if (strcmp(name, "lightblue") == 0)
-		return (RGB_t) { { 11393254 } };
-	else if (strcmp(name, "skyblue") == 0)
-		return (RGB_t) { { 8900331 } };
-	else if (strcmp(name, "lightskyblue") == 0)
-		return (RGB_t) { { 8900346 } };
-	else if (strcmp(name, "deepskyblue") == 0)
-		return (RGB_t) { { 49151 } };
-	else if (strcmp(name, "dodgerblue") == 0)
-		return (RGB_t) { { 2003199 } };
-	else if (strcmp(name, "cornflowerblue") == 0)
-		return (RGB_t) { { 6591981 } };
-	else if (strcmp(name, "mediumslateblue") == 0)
-		return (RGB_t) { { 8087790 } };
-	else if (strcmp(name, "royalblue") == 0)
-		return (RGB_t) { { 4286945 } };
-	else if (strcmp(name, "mediumblue") == 0)
-		return (RGB_t) { { 205 } };
-	else if (strcmp(name, "darkblue") == 0)
-		return (RGB_t) { { 139 } };
-	else if (strcmp(name, "midnightblue") == 0)
-		return (RGB_t) { { 1644912 } };
-
-	// browns
-	else if (strcmp(name, "cornsilk") == 0)
-		return (RGB_t) { { 16775388 } };
-	else if (strcmp(name, "blanchedalmond") == 0)
-		return (RGB_t) { { 16772045 } };
-	else if (strcmp(name, "bisque") == 0)
-		return (RGB_t) { { 16770244 } };
-	else if (strcmp(name, "navajowhite") == 0)
-		return (RGB_t) { { 16768685 } };
-	else if (strcmp(name, "wheat") == 0)
-		return (RGB_t) { { 16113325 } };
-	else if (strcmp(name, "burlywood") == 0)
-		return (RGB_t) { { 14596231 } };
-	else if (strcmp(name, "tan") == 0)
-		return (RGB_t) { { 13808780 } };
-	else if (strcmp(name, "rosybrown") == 0)
-		return (RGB_t) { { 12357519 } };
-	else if (strcmp(name, "sandybrown") == 0)
-		return (RGB_t) { { 16032864 } };
-	else if (strcmp(name, "goldenrod") == 0)
-		return (RGB_t) { { 14329120 } };
-	else if (strcmp(name, "peru") == 0)
-		return (RGB_t) { { 13468991 } };
-	else if (strcmp(name, "chocolate") == 0)
-		return (RGB_t) { { 13789470 } };
-	else if (strcmp(name, "saddlebrown") == 0)
-		return (RGB_t) { { 9127187 } };
-	else if (strcmp(name, "sienna") == 0)
-		return (RGB_t) { { 10506797 } };
-	else if (strcmp(name, "maroon") == 0)
-		return (RGB_t) { { 8388608 } };
-
-	// whites
-	else if (strcmp(name, "snow") == 0)
-		return (RGB_t) { { 16775930 } };
-	else if (strcmp(name, "honeydew") == 0)
-		return (RGB_t) { { 15794160 } };
-	else if (strcmp(name, "mintcream") == 0)
-		return (RGB_t) { { 16121850 } };
-	else if (strcmp(name, "azure") == 0)
-		return (RGB_t) { { 15794175 } };
-	else if (strcmp(name, "aliceblue") == 0)
-		return (RGB_t) { { 15792383 } };
-	else if (strcmp(name, "ghostwhite") == 0)
-		return (RGB_t) { { 16316671 } };
-	else if (strcmp(name, "whitesmoke") == 0)
-		return (RGB_t) { { 16119285 } };
-	else if (strcmp(name, "seashell") == 0)
-		return (RGB_t) { { 16774638 } };
-	else if (strcmp(name, "beige") == 0)
-		return (RGB_t) { { 16119260 } };
-	else if (strcmp(name, "oldlace") == 0)
-		return (RGB_t) { { 16643558 } };
-	else if (strcmp(name, "floralwhite") == 0)
-		return (RGB_t) { { 16775920 } };
-	else if (strcmp(name, "ivory") == 0)
-		return (RGB_t) { { 16777200 } };
-	else if (strcmp(name, "antiquewhite") == 0)
-		return (RGB_t) { { 16444375 } };
-	else if (strcmp(name, "linen") == 0)
-		return (RGB_t) { { 16445670 } };
-	else if (strcmp(name, "lavenderblush") == 0)
-		return (RGB_t) { { 16773365 } };
-	else if (strcmp(name, "mistyrose") == 0)
-		return (RGB_t) { { 16770273 } };
-
-	// greys
-	else if (strcmp(name, "gainsboro") == 0)
-		return (RGB_t) { { 14474460 } };
-	else if (strcmp(name, "lightgrey") == 0)
-		return (RGB_t) { { 13882323 } };
-	else if (strcmp(name, "silver") == 0)
-		return (RGB_t) { { 12632256 } };
-	else if (strcmp(name, "darkgrey") == 0)
-		return (RGB_t) { { 11119017 } };
-	else if (strcmp(name, "dimgrey") == 0)
-		return (RGB_t) { { 6908265 } };
-	else if (strcmp(name, "lightslategrey") == 0)
-		return (RGB_t) { { 7833753 } };
-	else if (strcmp(name, "slategrey") == 0)
-		return (RGB_t) { { 7372944 } };
-	else if (strcmp(name, "darkslategrey") == 0)
-		return (RGB_t) { { 3100495 } };
-	else
-		return (RGB_t) { { 0 } };
-
+	return colors_map[name];
 }
