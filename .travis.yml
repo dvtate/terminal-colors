@@ -6,8 +6,8 @@ compiler:
   - clang
   
 script: 
-  - g++ example.cpp terminal_colors.cpp -Wall -Wextra -o terminal_colors_example
-  - g++ rainbow.cpp terminal_colors.cpp -Wall -Wextra -o terminal_colors_example2
+  - g++ example.cpp terminal_colors.cpp -Wall -Wextra -o terminal_colors_example -std=c++11
+  - g++ rainbow.cpp terminal_colors.cpp -Wall -Wextra -o terminal_colors_example2 -std=c++11
 
 notifications:
   email: false
